@@ -1,0 +1,34 @@
+.container {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.container .border {
+    border-radius: 10px;
+    background-color: skyblue;
+}
+.poster {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+@media (max-width:768px) {
+    .poster {
+        display: flex;
+        justify-content: center;
+        /* Center horizontally */
+        align-items: center;
+        /* Center vertically */
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}
