@@ -1,6 +1,10 @@
+body {
+    overflow-x: hidden;
+}
+
 .container {
     display: flex;
-    position: absolute;
+    position: relative;
     align-items: center;
     justify-content: center;
     margin: auto;
@@ -18,25 +22,71 @@ label {
     border-radius: 10px;
     background-color: skyblue;
 }
-.poster {
+
+.instruction {
+
+    width: 800px;
     display: flex;
-    position: absolute;
+    text-align: justify;
     justify-content: center;
-    /* Center horizontally */
-    align-items: center;
-    /* Center vertically */
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: auto;
+    border-radius: 10px;
+}
+
+table tbody tr td img {
+
+    vertical-align: top;
+}
+
+
+table tbody tr td button {
+
+    margin: 30px;
+    margin-top: 200px;
+    margin-left: -160px;
+
+}
+
+table tbody tr .sign button {
+
+    margin: 30px;
+    margin-top: 150px;
+    margin-left: -220px;
+
 }
 
 @media (max-width:768px) {
-    .poster {
+    .instruction {
+        width: 40%;
         display: flex;
+        text-align: justify;
         justify-content: center;
-        /* Center horizontally */
-        align-items: center;
-        /* Center vertically */
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin: auto;
+        margin-bottom: 30px;
+        border-radius: 10px;
+    }
+
+    table tbody tr .photograph img {
+    
+        vertical-align: top;
+        margin-left: 200px;
+        
+    }
+    
+    
+    table tbody tr .photograph button {
+    
+        margin: 30px;
+        margin-top: 10px;
+        margin-left: 200px;
+    
+    }
+    
+    table tbody tr .sign button {
+    
+        margin: 30px;
+        margin-top: 150px;
+        margin-left: -220px;
+    
     }
 }
