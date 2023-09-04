@@ -6,6 +6,14 @@
     margin: auto;
 }
 
+label {
+    font-weight: bolder;
+}
+
+.grayscale {
+    filter: grayscale(100%);
+  }
+
 .container .border {
     border-radius: 10px;
     background-color: skyblue;
