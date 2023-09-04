@@ -1,8 +1,7 @@
 import "./App.css";
 import Footer from "./components/Footer";
-import Form from "./components/Form";
-// import Maintenance from "./components/Maintainance.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Form from "./components/Form";
 
 function App() {
   return (
@@ -10,7 +9,7 @@ function App() {
       <div className="App">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Form />} />
+            <Route path="/" element={<Form/>} />
             {/* Add more routes as needed */}
           </Routes>
         </BrowserRouter>
