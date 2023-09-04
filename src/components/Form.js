@@ -206,25 +206,6 @@ export default function Form() {
           </div>
         </div>
       </div>
-      <div className="bg-success p-4 text-light instruction">
-        <p>
-          Welcome to Ojas Image and Signature Resizer – Your Go-To Tool for
-          Image and Signature Optimization. Whether you're applying for a job,
-          filling out important documents, or simply need to resize and enhance
-          your photos and signatures, we've got you covered.
-        </p>
-      </div>
-
-      <h4 className="text-light mt-2">
-      This Image Resizer is Design only For{' '}
-      <Link to="https://ojas.gujarat.gov.in/" style={{ textDecoration: 'none', color: '' }}>
-        OJAS
-      </Link>{' '}
-      Site.
-    </h4>
-      <small className="text-light">
-        Compress your photograph & signature Fast and Easy.
-      </small>
 
       {showImg && (
         <div className="container mt-4 mx-5">
@@ -286,6 +267,26 @@ export default function Form() {
           </div>
         </div>
       )}
+      
+      <div className="bg-success p-4 text-light instruction">
+        <p>
+          Welcome to Ojas Image and Signature Resizer – Your Go-To Tool for
+          Image and Signature Optimization. Whether you're applying for a job,
+          filling out important documents, or simply need to resize and enhance
+          your photos and signatures, we've got you covered.
+        </p>
+      </div>
+
+      <h4 className="text-light mt-2">
+      This Image Resizer is Design only For{' '}
+      <Link to="https://ojas.gujarat.gov.in/" style={{ textDecoration: 'none', color: '' }}>
+        OJAS
+      </Link>{' '}
+      Site.
+    </h4>
+      <small className="text-light">
+        Compress your photograph & signature Fast and Easy.
+      </small>
     </>
   );
 }
