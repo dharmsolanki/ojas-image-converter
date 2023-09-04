@@ -78,17 +78,86 @@ export default function Form() {
           </div>
         </div>
       </div>
+      <div className="bg-success p-4 text-light instruction">
+        <p>
+          Welcome to Ojas Image and Signature Resizer – Your Go-To Tool for
+          Image and Signature Optimization. Whether you're applying for a job,
+          filling out important documents, or simply need to resize and enhance
+          your photos and signatures, we've got you covered.
+        </p>
       </div>
 
-      <div className="poster">
-       
-       {image && (
+      <h4 className="text-light mt-2">
+      This Image Resizer is Design only For{' '}
+      <Link to="https://ojas.gujarat.gov.in/" style={{ textDecoration: 'none', color: '' }}>
+        OJAS
+      </Link>{' '}
+      Site.
+    </h4>
+      <small className="text-light">
+        Compress your photograph & signature Fast and Easy.
+      </small>
 
-         <img src={image} alt="" height="300px" width="290px" className="uploaded-img" />
-       )
-
-       }
-      </div>
+      {showImg && (
+        <div className="container mt-4 mx-5">
+          <div className="row justify-content-center">
+            <div className="col">
+              {showImg && (
+                <table
+                  className="table table-bordered table-dark mx-5"
+                  style={{ width: "100%" }}
+                >
+                  <tbody>
+                    <tr>
+                      <td className="photograph">
+                        {image && (
+                          <>
+                            <img
+                              ref={imageRef}
+                              src={image}
+                              alt="photograph"
+                              className="uploaded-img"
+                              height={imgHeight}
+                              width={imgWidth}
+                            />
+                            <button
+                              className="btn btn-success"
+                              onClick={handleDownloadImage}
+                            >
+                              Download Photograph
+                            </button>
+                          </>
+                        )}
+                      </td>
+                      <td className="sign">
+                        {sign && (
+                          <>
+                            <img
+                              ref={signRef}
+                              src={sign}
+                              alt="signature"
+                              className="uploaded-sign"
+                              height={signHeight}
+                              width={signWidth}
+                              style={{ filter: "grayscale(100%)" }}
+                            />
+                            <button
+                              className="btn btn-success"
+                              onClick={handleDownloadSign}
+                            >
+                              Download Signature
+                            </button>
+                          </>
+                        )}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
