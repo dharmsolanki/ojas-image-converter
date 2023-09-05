@@ -12,6 +12,8 @@ export default function Form() {
   const [imgWidth] = useState("136.06px");
   const [signHeight] = useState("94.5px");
   const [signWidth] = useState("283.46px");
+  const [convertedImgSize, setConvertedImgSize] = useState("");
+  const [convertedSignSize, setConvertedSignSize] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const imageRef = useRef(null);
   const signRef = useRef(null);
@@ -137,6 +139,22 @@ export default function Form() {
       setLoadingProgress(100);
       setIsLoading(false);
       setShowImg(true);
+
+      if (image) {
+        // Calculate the size of the converted image
+        const dataURL = image;
+        const byteString = atob(dataURL.split(",")[1]);
+        const imageSizeAfterConvert = (byteString.length / 1024).toFixed(2) + " KB";
+        setConvertedImgSize(imageSizeAfterConvert);
+  
+      }
+
+      if(sign) {
+        const dataURL = sign;
+        const byteString = atob(dataURL.split(",")[1]);
+        const signSizeAfterConvert = (byteString.length / 1024).toFixed(2) + " KB";
+        setConvertedSignSize(signSizeAfterConvert);
+      }
     }, 2000);
   };
 
@@ -261,6 +279,7 @@ export default function Form() {
                               height={imgHeight}
                               width={imgWidth}
                             />
+                            <small>Image size: {convertedImgSize}</small>
                             <button
                               className="btn btn-success"
                               onClick={handleDownloadImage}
@@ -282,6 +301,7 @@ export default function Form() {
                               width={signWidth}
                               style={{ filter: "grayscale(100%)" }}
                             />
+                            <small>Image size: {convertedSignSize}</small>
                             <button
                               className="btn btn-success"
                               onClick={handleDownloadSign}
