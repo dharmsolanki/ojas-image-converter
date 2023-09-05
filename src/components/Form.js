@@ -1,8 +1,10 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import LoadingBar from "react-top-loading-bar";
 import "../css/Form.css";
 
 export default function Form() {
+  const [loadingProgress, setLoadingProgress] = useState(0);
   const [image, setImage] = useState("");
   const [sign, setSign] = useState("");
   const [showImg, setShowImg] = useState(false);
@@ -14,20 +16,29 @@ export default function Form() {
   const imageRef = useRef(null);
   const signRef = useRef(null);
 
-  const isDisable = !image || !sign
+  const isDisable = !image || !sign;
+
+  const checkFileSize = (file, maxSizeKB) => {
+    return file.size / 1024 <= maxSizeKB;
+  };
 
   const handleImageChange = async (event) => {
     if (event.target && event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
 
-      // Function to resize and compress the selected image
-      resizeAndCompressImage(file)
-        .then((compressedImage) => {
-          setImage(compressedImage);
-        })
-        .catch((error) => {
-          console.error("Error compressing image:", error);
-        });
+      // Check if the file size is within the limit (5 MB)
+      if (!checkFileSize(file, 5120)) {
+        alert("Image size exceeds the maximum limit of 5 MB");
+        return;
+      }
+
+      try {
+        const compressedImage = await resizeAndCompressImage(file);
+        setImage(compressedImage);
+      } catch (error) {
+        console.error("Error compressing image:", error);
+        setImage(""); // Set image state to empty in case of an error
+      }
     }
   };
 
@@ -35,14 +46,19 @@ export default function Form() {
     if (event.target && event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
 
+      if (!checkFileSize(file, 5120)) {
+        alert("Image size exceeds the maximum limit of 5 MB");
+        return;
+      }
+
       // Function to resize and compress the selected signature
-      resizeAndCompressImage(file)
-        .then((compressedSignature) => {
-          setSign(compressedSignature);
-        })
-        .catch((error) => {
-          console.error("Error compressing signature:", error);
-        });
+      try {
+        const compressedSignature = await resizeAndCompressImage(file);
+        setSign(compressedSignature);
+      } catch (error) {
+        console.error("Error compressing signature:", error);
+        setSign(""); // Set sign state to empty in case of an error
+      }
     }
   };
 
@@ -50,7 +66,7 @@ export default function Form() {
   const resizeAndCompressImage = async (file) => {
     return new Promise((resolve, reject) => {
       const maxWidthOrHeight = 300; // Adjust as needed
-      const maxSizeKB = 15; // Maximum size in KB
+      const maxSizeKB = 300; // Maximum size in KB
 
       const image = new Image();
       const canvas = document.createElement("canvas");
@@ -114,12 +130,14 @@ export default function Form() {
   };
 
   const handleConvert = () => {
+    setLoadingProgress(50);
     setIsLoading(true);
 
     setTimeout(() => {
+      setLoadingProgress(100);
       setIsLoading(false);
       setShowImg(true);
-    }, 5000);
+    }, 2000);
   };
 
   const handleDownloadImage = () => {
@@ -166,6 +184,7 @@ export default function Form() {
 
   return (
     <>
+      <LoadingBar color="#f11946" progress={loadingProgress} />
       <h3 className="text-light mt-5">Ojas Image Size Reducer</h3>
       <div className="container mt-5">
         <div className="border border-info border-2 p-4 mb-4">
