@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "../css/Form.css";
 
 export default function Form() {
@@ -10,8 +10,11 @@ export default function Form() {
   const [imgWidth] = useState("136.06px");
   const [signHeight] = useState("94.5px");
   const [signWidth] = useState("283.46px");
+  const [isLoading, setIsLoading] = useState(false);
   const imageRef = useRef(null);
   const signRef = useRef(null);
+
+  const isDisable = !image || !sign
 
   const handleImageChange = async (event) => {
     if (event.target && event.target.files && event.target.files.length > 0) {
@@ -111,7 +114,12 @@ export default function Form() {
   };
 
   const handleConvert = () => {
-    setShowImg(true);
+    setIsLoading(true);
+
+    setTimeout(() => {
+      setIsLoading(false);
+      setShowImg(true);
+    }, 5000);
   };
 
   const handleDownloadImage = () => {
@@ -195,11 +203,16 @@ export default function Form() {
             <div className="col">
               <div className="form-group">
                 <button
-                  className="btn btn-success"
+                  className={isLoading ? "loading-button" : "btn btn-success"}
                   style={{ width: "100%" }}
                   onClick={handleConvert}
+                  disabled={isLoading || isDisable}
                 >
-                  Convert
+                  {isLoading ? (
+                    <div className="custom-loader"></div>
+                  ) : (
+                    "Convert"
+                  )}
                 </button>
               </div>
             </div>
@@ -267,7 +280,7 @@ export default function Form() {
           </div>
         </div>
       )}
-      
+
       <div className="bg-success p-4 text-light instruction">
         <p>
           Welcome to Ojas Image and Signature Resizer – Your Go-To Tool for
@@ -278,12 +291,15 @@ export default function Form() {
       </div>
 
       <h4 className="text-light mt-2">
-      This Image Resizer is Design only For{' '}
-      <Link to="https://ojas.gujarat.gov.in/" style={{ textDecoration: 'none', color: '' }}>
-        OJAS
-      </Link>{' '}
-      Site.
-    </h4>
+        This Image Resizer is Design only For{" "}
+        <Link
+          to="https://ojas.gujarat.gov.in/"
+          style={{ textDecoration: "none", color: "" }}
+        >
+          OJAS
+        </Link>{" "}
+        Site.
+      </h4>
       <small className="text-light">
         Compress your photograph & signature Fast and Easy.
       </small>
