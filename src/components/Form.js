@@ -32,7 +32,7 @@ export default function Form() {
 
       // Load the selected image
       image.src = URL.createObjectURL(file);
-    });
+    };
   };
 
   const handleConvert = () => {
